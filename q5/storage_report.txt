@@ -1,0 +1,53 @@
+Question 5 - Storage Assessment Report
+
+Commands and outputs:
+1. lsblk
+NAME    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINTS
+loop0     7:0    0 63.8M  1 loop
+loop1     7:1    0 91.7M  1 loop
+loop2     7:2    0 49.3M  1 loop
+loop3     7:3    0 257G  0 loop
+loop4     7:4    0 32G  0 loop /workspaces
+loop5     7:5    0 500M  0 loop
+loop6     7:6    0 63.8M  1 loop
+sda       8:0    0 45G  0 disk
+└─sda1    8:1    0 45G  0 part /tmp
+sdb       8:16   0 30G  0 disk
+├─sdb1    8:17   0 29.9G  0 part /workspaces/.codespaces/shared
+├─sdb14   8:30   0 4M  0 part
+└─sdb15   8:31   0 106M  0 part
+sdc       8:32   0 512G  0 disk
+└─sdc1    8:33   0 512G  0 part
+sr0      11:0    1 628K  0 rom
+
+2. mount | head -5
+overlay on / type overlay (rw,relatime)
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev type tmpfs (rw,nosuid,size=65536k,mode=755,inode64)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=666)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime)
+
+3. df -h
+Filesystem      Size  Used Avail Use%
+overlay          32G  9.6G 21G 33%
+tmpfs            64M 0 64M 0%
+shm              64M 0 64M 0%
+/dev/root        29G 24G 5.3G 82%
+/dev/sda1        44G 2.6G 40G 7%
+/dev/loop4       32G 9.6G 21G 33%
+
+4. df -i
+Filesystem      Inodes  IUsed IFree IUse%
+overlay        2097152 203081 1894071 10%
+tmpfs          1016900 213 1016687 1%
+shm            1016900 1 1016899 1%
+/dev/root      3870720 243625 3627095 7%
+/dev/sda1      2949120 36 2949084 1%
+/dev/loop4     2097152 203081 1894071 10%
+
+Observations:
+- The environment has several block devices, including sda, sdb, and sdc.
+- The main root filesystem is using about 82% of disk space, while the workspace mount still has free capacity.
+- Inode usage is low across the mounted filesystems, indicating no current inode exhaustion.
+- The storage layout suggests that the workspace and temporary data are mounted on separate partitions, which helps isolate workloads and preserve space.
+

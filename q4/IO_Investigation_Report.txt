@@ -1,0 +1,42 @@
+Question 4 - File Access and I/O Investigation Report
+
+Commands and outputs:
+1. echo "sample log line" > app.log
+Created a sample log file for investigation.
+
+2. lsof | head -n 20
+Listed open files and processes. The output showed several active processes and file descriptors.
+
+3. exec 3<app.log
+Opened app.log for reading using file descriptor 3.
+
+4. lsof -p $$ | grep app.log
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+bash 19023 codespace 3r REG 7,4 16 1310807 /workspaces/SGA1/q4/app.log
+
+5. ls -l /proc/$$/fd | grep app.log
+lr-x------ 1 codespace codespace 64 Jul 3 15:46 3 -> /workspaces/SGA1/q4/app.log
+
+6. ls -l /proc/$$/fd
+Displayed the currently open file descriptors for the shell process.
+
+7. ls -l > stdout.txt
+Redirected the listing output to stdout.txt.
+
+8. ls /not_a_real_path 2> stderr.txt
+Redirected the error output to stderr.txt.
+
+9. (ls -l && ls /not_a_real_path) > combined.txt 2>&1
+Combined both standard output and standard error into combined.txt.
+
+10. ulimit -a
+Displayed system resource limits such as file size, stack size, and open files.
+
+11. exec 3<&-
+Closed file descriptor 3.
+
+Observations:
+- File descriptor 3 was opened for reading app.log and was visible through /proc/$$/fd.
+- Output redirection using > sent normal command output to a file, while 2> captured error messages.
+- The combined redirection construct 2>&1 merged standard error into standard output into a single file.
+- The shell resource limits showed that the environment allows a large number of open files and other system resources.

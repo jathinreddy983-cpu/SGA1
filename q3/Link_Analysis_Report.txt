@@ -1,0 +1,56 @@
+Question 3 - File System and Link Analysis Report
+
+Commands and outputs:
+1. echo "Linux link test file" > original.txt
+Created the original file with sample content.
+
+2. ln original.txt hardlink.txt
+Created a hard link to the same inode.
+
+3. ln -s original.txt symlink.txt
+Created a symbolic link pointing to original.txt.
+
+4. ls -li
+total 8
+1310805 -rw-rw-rw- 2 codespace codespace 21 Jul 3 15:38 hardlink.txt
+1310805 -rw-rw-rw- 2 codespace codespace 21 Jul 3 15:38 original.txt
+1310806 lrwxrwxrwx 1 codespace codespace 12 Jul 3 15:39 symlink.txt -> original.txt
+
+5. stat original.txt hardlink.txt symlink.txt
+File: original.txt
+Inode: 1310805
+Links: 2
+File: hardlink.txt
+Inode: 1310805
+Links: 2
+File: symlink.txt
+Inode: 1310806
+Links: 1
+
+6. cat original.txt
+Linux link test file
+
+7. cat hardlink.txt
+Linux link test file
+
+8. cat symlink.txt
+Linux link test file
+
+9. rm original.txt
+Deleted the original filename.
+
+10. ls -li
+total 4
+1310805 -rw-rw-rw- 1 codespace codespace 21 Jul 3 15:38 hardlink.txt
+1310806 lrwxrwxrwx 1 codespace codespace 12 Jul 3 15:39 symlink.txt -> original.txt
+
+11. cat hardlink.txt
+Linux link test file
+
+12. cat symlink.txt
+cat: symlink.txt: No such file or directory
+
+Observations:
+- Hard links and the original file share the same inode and remain usable after the original filename is removed.
+- A symbolic link is a separate file that stores the target path; it breaks when the target is deleted.
+- The inode comparison confirms that hard links are aliases of the same file, while symbolic links are independent pointers.

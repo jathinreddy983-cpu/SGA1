@@ -1,0 +1,52 @@
+Question 1 - Environment Verification Report
+
+Commands and outputs:
+1. whoami
+codespace
+
+2. groups
+codespace pipx python oryx golang docker sdkman rvm php conda nvs nvm hugo ssh
+
+3. echo "$SHELL"
+/bin/bash
+
+4. pwd
+/
+
+5. ls -ls
+total 88
+0 lrwxrwxrwx 1 root root 7 Apr 22 2024 bin -> usr/bin
+4 drwxr-xr-x 2 root root 4096 Jul 10 2025 bin.usr-is-merged
+4 drwxr-xr-x 2 root root 4096 Apr 22 2024 boot
+0 drwxr-xr-x 13 root root 3940 Jul 3 15:12 dev
+8 drwxr-xr-x 1 root root 4096 Jul 3 15:13 etc
+4 drwxrwsr-x 3 codespace golang 4096 Apr 6 00:22 go
+8 drwxr-xr-x 1 root root 4096 Jul 3 15:12 home
+0 lrwxrwxrwx 1 root root 7 Apr 22 2024 lib -> usr/lib
+4 drwxr-xr-x 2 root root 4096 Nov 14 2024 lib.usr-is-merged
+0 lrwxrwxrwx 1 root root 9 Mar 11 11:59 lib32 -> usr/lib32
+0 lrwxrwxrwx 1 root root 9 Apr 22 2024 lib64 -> usr/lib64
+4 drwxr-xr-x 2 root root 4096 Feb 10 14:05 media
+4 drwxr-xr-x 2 root root 4096 Feb 10 14:05 mnt
+4 drwxrwsr-x 1 codespace oryx 4096 Jul 3 15:12 opt
+0 dr-xr-xr-x 236 root root 0 Jul 3 15:12 proc
+4 drwx------ 1 root root 4096 Mar 11 12:16 root
+4 drwxr-xr-x 1 root root 4096 Jul 3 15:12 run
+0 lrwxrwxrwx 1 root root 8 Apr 22 2024 sbin -> usr/sbin
+4 drwxr-xr-x 2 root root 4096 Jul 10 2025 sbin.usr-is-merged
+4 drwxr-xr-x 2 root root 4096 Feb 10 14:05 srv
+0 dr-xr-xr-x 12 root root 0 Jul 3 15:05 sys
+4 drwxr-xrwt+ 4 root root 4096 Jul 3 15:14 tmp
+8 drwxr-xr-x 1 root root 4096 Mar 11 11:59 usr
+8 drwxr-xr-x 1 root root 4096 Jul 3 15:12 var
+4 drwxr-xr-x 5 root root 4096 Jul 3 15:09 vscode
+4 drwxr-xrwx+ 5 codespace root 4096 Jul 3 15:13 workspaces
+
+6. curl -s --max-time 10 https://youtube.com > /dev/null && echo "Network: youtube.com reachable"
+Network: youtube.com reachable
+
+Observations:
+- The current user is codespace and the primary shell is /bin/bash.
+- The current working directory is /.
+- The system showed successful external network connectivity to youtube.com.
+- The root directory contains standard system folders and the workspaces directory.

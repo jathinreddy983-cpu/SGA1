@@ -1,0 +1,44 @@
+Question 2 - Secure Project Workspace Setup Report
+
+Commands and outputs:
+1. mkdir -p secure_workspace/{docs,src,logs}
+Created the requested directory tree for documentation, source, and logs.
+
+2. touch secure_workspace/docs/plan.txt secure_workspace/src/app.txt secure_workspace/logs/activity.log
+Created the project files inside the new directories.
+
+3. ls -ld secure_workspace secure_workspace/*
+drwxrwxrwx+ 5 codespace codespace 4096 Jul 3 15:33 secure_workspace
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 3 15:33 secure_workspace/docs
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 3 15:33 secure_workspace/logs
+drwxrwxrwx+ 2 codespace codespace 4096 Jul 3 15:33 secure_workspace/src
+
+4. chmod 750 secure_workspace
+chmod 750 secure_workspace/docs secure_workspace/src secure_workspace/logs
+Changed the workspace and subdirectories to mode 750.
+
+5. chmod 640 secure_workspace/docs/plan.txt secure_workspace/src/app.txt secure_workspace/logs/activity.log
+The command for activity.log failed because the file name was entered incorrectly as activity instead of activity.log.
+
+6. ls -ld secure_workspace secure_workspace/*
+drwxr-x---+ 5 codespace codespace 4096 Jul 3 15:33 secure_workspace
+drwxr-x---+ 2 codespace codespace 4096 Jul 3 15:33 secure_workspace/docs
+drwxr-x---+ 2 codespace codespace 4096 Jul 3 15:33 secure_workspace/logs
+drwxr-x---+ 2 codespace codespace 4096 Jul 3 15:33 secure_workspace/src
+
+7. ls -l secure_workspace/*
+secure_workspace/docs/plan.txt        -rw-r-----
+secure_workspace/logs/activity.log    -rw-rw-rw-
+secure_workspace/src/app.txt          -rw-r-----
+
+8. umask
+0022
+
+Ownership details:
+- Owner/group for the created workspace and files: codespace:codespace
+
+Observations:
+- The workspace and its subfolders were secured with permissions of 750 so that only the owner and group can access them.
+- The project files plan.txt and app.txt were set to 640 to restrict access to the owner and group.
+- The activity.log file remained at 644 because the chmod command targeted the wrong filename and the default umask was 0022.
+- The umask value of 0022 means newly created files are typically 644 and directories 755 unless permissions are changed explicitly.
